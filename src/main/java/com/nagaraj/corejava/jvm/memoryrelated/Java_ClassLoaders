@@ -1,0 +1,43 @@
+Defination : Clasloaders
+            The Java ClassLoader is an integral part of the Java Runtime Environment (JRE)
+            that dynamically loads Java classes into the Java Virtual Machine (JVM).
+
+Types: 1)Bootstrap Class Loader
+       2)Platform/Extension Class Loader
+       3)System/Application Class Loader
+
+1)Bootstrap Class Loader: At the top of the class loader hierarchy is the Bootstrap Class Loader.
+                          It’s the root of the class loading system in Java.
+        For Java 8 and earlier:
+                        Responsible for loading core Java classes (like java.lang.*, java.util.*)
+                        from <JAVA_HOME>/jre/lib.
+        For Java 9 and later:
+                        Loads core Java classes from the modular runtime image, typically in the
+                        <JAVA_HOME>/lib/modules or <JAVA_HOME>/jmods directory. The mechanism is
+                        integrated with the Java Platform Module System (JPMS).
+        Unique Characteristics:
+                        It’s important to note that the Bootstrap Class Loader is not a Java object,
+                        unlike other class loaders. It’s implemented natively in the JVM for performance
+                        and fundamental security reasons.
+
+2)Platform Class Loader: Starting with Java 9,the Extension Class Loader has been replaced by the Platform Class Loader.
+
+        Responsibility:
+                    The Platform Class Loader loads classes from the standard library and any additional platform libraries,
+                     ensuring they are accessible to application-level code without mixing them into the bootstrap classes.
+        Behavior:
+                   In the class loader hierarchy, the Platform Class Loader sits between the Bootstrap Class Loader and the
+                   System (Application) Class Loader, following the same delegation principles: it first asks its parent,
+                   and if the parent cannot load the class, it attempts to load it itself.
+
+3)System/Application Class Loader
+                                This is the class loader responsible for loading application-level classes from the classpath.
+
+        Responsibility:
+                     It loads classes from the system classpath, which can be set using the CLASSPATH environment variable,
+                     the -classpath command-line option, or the classpath specified in a manifest file within a JAR.
+        Behavior:
+                    When a request to load a class is made, the System Class Loader delegates the request up the hierarchy.
+                    If neither the Bootstrap nor the Platform (Extension in Java 8) Class Loader can fulfill the request,
+                    the System Class Loader attempts to load the class.
+
