@@ -1,0 +1,318 @@
+@Transaction:
+            The @Transactional annotation is used to mark a method or a class as transactional,
+            meaning that any database operations performed within the marked method or class will
+            be executed within a transaction. If the transaction is successful, the changes will
+            be committed to the database. If an error occurs and the transaction is rolled back,
+            the changes will not be persisted in the database.
+
+            Transaction manage the changes that you perform in one or more systems. These can be databases,
+            messages brokers. or any other kind of software system. The main goal of a transaction is to provide ACID
+            characteristics to ensure the consistency and validity of your data.
+
+
+It Allows us to to set:
+            * Propagation
+            * Isolation
+            * timeout
+            * read-only
+            * rollback
+
+Ex:
+
+@Service
+@Transactional  // class level
+public class EmployeeService{
+
+    @Autowired
+    private EmployeeRepo employeeRepo;
+
+    @Autowired
+    private AddressService addressService;
+
+    @Transactional //  method level
+    public Employee createEmployee(Employee employee){
+        Employee employee = employeeRepo.save(employee);
+        Address address = new Address();
+        address.setId(1l);
+        address.setName("Bangalore");
+        address.setEmp(employee);
+        addressService.createAddress(address);
+        return savEmployee:
+    }
+}
+
+
+@Service
+public class AddressService{
+
+    @Autowired
+    AddressRepo addressRepo;
+
+    @Transactional //  method level
+    public Address createAddress(Address address){
+        return addressRepo.save(address);
+    }
+
+}
+
+How internally @Transactional Internally works:
+
+        ->Spring create a proxy, or manipulates the class byte-code,
+          to manage the creation, commit, and roll back of the transaction
+        ->If we have a method like callMethod and we mark it as @Transactional, spring
+          will wrap some transaction management code around the invocation @Transactional method called
+
+          Ex: createTransactionIfNecessary();
+               try{
+                    createEmployee();
+                    commitTransactionAfterReturning();
+               }catch(Exception e){
+                    rollbackTransactionAfterThrowing();
+                    throw exception;
+               }
+
+
+Note:
+
+ ->if @Transactional used at class level and method level the method level will get highest preference
+ ->The @Transactional annotation does not work on private methods by default in Spring.
+    This is because Spring's default AOP (Aspect-Oriented Programming) mechanism uses
+    dynamic proxies, which can only intercept external calls to public methods
+
+1)Propagation:
+   This defines how the transaction boundary can be managed when we one method having @Transactional
+   annotation which calls another method which is having @Transactional annotation
+
+   Types:
+    1)REQUIRED  (Default One)
+    2)REQUIRES_NEW
+    3)NESTED
+    4)SUPPORTS
+    5)NOT_SUPPORTED
+    6)MANDATORY
+    7)NEVER
+
+
+1)REQUIRED :
+    ->This is the default one
+    ->For this the method required a transaction if its having the transaction it will use if
+      its not have means it will create a new one
+    ->If exception occurs, both transactions, parent and child will be rolled back as they both
+      use same physical transaction
+
+Ex: @Service
+    public class EmployeeService{
+
+        @Autowired
+        private EmployeeRepo employeeRepo;
+
+        @Autowired
+        private AddressService addressService;
+
+        @Transactional //  method level
+        public Employee createEmployee(Employee employee){
+            Employee employee = employeeRepo.save(employee);
+            Address address = new Address();
+            address.setId(1l);
+            address.setName("Bangalore");
+            address.setEmp(employee);
+            addressService.createAddress(address);
+            return employee;
+        }
+    }
+
+
+    @Service
+    public class AddressService{
+
+        @Autowired
+        AddressRepo addressRepo;
+
+        @Transactional //  method level
+        public Address createAddress(Address address){
+            return addressRepo.save(address);
+        }
+
+    }
+
+->Here we have already @Transactional annotation at "createEmployee"
+    so when the "createAddress" method called it will be used the existing transaction
+->Suppose we dont have an @Transactional at  "createEmployee" then it will create a new transaction
+    at "createAddress" method
+
+2)REQUIRES_NEW :
+   ->It create a new transaction every time.
+   ->Here spring suspends the current transaction if it exists, and then create a new one.
+     It instructs the spring container to always create a new inner physical transaction and
+     inherit an outer physical transactions characteristics
+
+Ex: @Service
+    public class EmployeeService{
+
+        @Autowired
+        private EmployeeRepo employeeRepo;
+
+        @Autowired
+        private AddressService addressService;
+
+        @Transactional //  method level
+        public Employee createEmployee(Employee employee){
+            Employee employee = employeeRepo.save(employee);
+            Address address = new Address();
+            address.setId(1l);
+            address.setName("Bangalore");
+            address.setEmp(employee);
+            addressService.createAddress(address);
+            return savEmployee:
+        }
+    }
+
+
+    @Service
+    public class AddressService{
+        @Autowired
+        AddressRepo addressRepo;
+
+        @Transactional(propagation = Propagation.REQUIRED_NEW) // required_new
+        public Address createAddress(Address address){
+            return addressRepo.save(address);
+        }
+    }
+
+3)NESTED :
+  -> NESTED acts like REQUIRED, only it uses savepoints between nested invocations
+  -> Spring checks if transactions exists, and if so, it marks a save point. This means
+     that if our business logic execution, then the transaction rollbacks to this save point.
+     If theres no active transactions, it works like REQUIRED
+
+Ex:      @Service
+         public class EmployeeService{
+
+             @Autowired
+             private EmployeeRepo employeeRepo;
+
+             @Autowired
+             private AddressService addressService;
+
+             @Transactional //  method level
+             public Employee createEmployee(Employee employee){
+                 Employee employee = employeeRepo.save(employee);
+                 Address address = new Address();
+                 address.setId(1l);
+                 address.setName("Bangalore");
+                 address.setEmp(employee);
+                 addressService.createAddress(address); // add save checkpoints here
+                 return savEmployee:
+             }
+         }
+
+
+         @Service
+         public class AddressService{
+             @Autowired
+             AddressRepo addressRepo;
+
+             @Transactional(propagation = Propagation.NESTED) // required_new
+             public Address createAddress(Address address){
+                 return addressRepo.save(address);
+             }
+         }
+
+         if any exception in throws in addressservice then the roll back will happens till save checkpoints
+
+
+
+4)MANDATORY
+   -> It will not create any new transaction but it will throw an exception if transaction not found means
+
+Ex:      @Service
+         public class EmployeeService{
+
+             @Autowired
+             private EmployeeRepo employeeRepo;
+
+             @Autowired
+             private AddressService addressService;
+
+             @Transactional //  method level
+             public Employee createEmployee(Employee employee){
+                 Employee employee = employeeRepo.save(employee);
+                 Address address = new Address();
+                 address.setId(1l);
+                 address.setName("Bangalore");
+                 address.setEmp(employee);
+                 addressService.createAddress(address); // add save checkpoints here
+                 return savEmployee:
+             }
+         }
+
+
+         @Service
+         public class AddressService{
+             @Autowired
+             AddressRepo addressRepo;
+
+             @Transactional(propagation = Propagation.MANDATORY) // required_new
+             public Address createAddress(Address address){
+                 return addressRepo.save(address);
+             }
+         }
+
+      Here if employeeService is not having transaction annotation means it will throw an exception
+      Exception : IllegalTransactionStateException : No existing transaction found for transaction
+
+5)NEVER:
+   -> If any transaction found means it will throw an exception.
+   ->This states that no physical transaction should exist. if a physical transaction is found.
+      then NEVER will cause an exception as follows org.springframework.transaction.
+      illegalTransactionStateException : Existing transaction found for transaction marked with propagation "never"
+Ex: @Service
+    public class OrderService {
+
+        @Autowired
+        private NotificationService notificationService;
+
+        @Transactional(propagation = Propagation.REQUIRED)
+        public void placeOrder(Order order) {
+            // Save order to database (starts or joins transaction)
+            orderRepository.save(order);
+            // This call will THROW an IllegalTransactionStateException
+            // because it is called inside an active transaction.
+            notificationService.sendEmail(order);
+        }
+    }
+
+    @Service
+    public class NotificationService {
+
+        @Transactional(propagation = Propagation.NEVER)
+        public void sendEmail(Order order) {
+            // Logic to send external email
+            System.out.println("Email sent for order: " + order.getId());
+        }
+    }
+
+6)NOT_SUPPOSRTED:
+  -> If a current transaction exists, first suspends it, and then the business logic is executed
+     without a transaction.
+
+7)SUPPORTED:
+  ->If a transaction exists it will run it with, if no second transaction it will run without transaction
+
+
+  Propagation 	  If Active Transaction Exists	          If No Transaction Exists
+  REQUIRED	       Joins current	                         Creates new
+  REQUIRES_NEW	   Suspends current; creates new	         Creates new
+  NESTED	       Creates savepoint (nested)	             Creates new
+  SUPPORTS	       Joins current	                         Runs non-transactionally
+  NOT_SUPPORTED	   Suspends current; runs non-tx	         Runs non-transactionally
+  MANDATORY	       Joins current	                         Throws Exception
+  NEVER	           Throws Exception	                         Runs non-transactionally
+
+
+
+
+
+
+
+
