@@ -1,0 +1,19 @@
+ACID:
+ ACID is an acronym that stands for Atomicity, Consistency, Isolation and Durability
+
+* Atomicity:
+    ->It describes all or nothing
+    ->Either all operations performed within the transaction get executed or none of them.
+    ->That means if you commit the transaction successfully, you can be sure that all operations got performed.
+      It also enables you to abort a transaction and roll back all operations if an error occurs
+* Consistency:
+    -> This ensures that transaction takes a system from one consistent state to another consistent state.
+    ->Ex: Bank transaction one account to another the money should deduct from one account to credit to another
+          account not like from one account it deducted and another account it credited vise/versa
+
+* Isolation:
+    ->Isolation means that's changes that you perform within a transaction are not visible to any other transactions
+      until you commit them successfully
+
+* Durability:
+   ->Ensures that your committed changes get persisted
