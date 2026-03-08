@@ -300,16 +300,60 @@ Ex: @Service
   ->If a transaction exists it will run it with, if no second transaction it will run without transaction
 
 
-  Propagation 	  If Active Transaction Exists	          If No Transaction Exists
-  REQUIRED	       Joins current	                         Creates new
-  REQUIRES_NEW	   Suspends current; creates new	         Creates new
-  NESTED	       Creates savepoint (nested)	             Creates new
-  SUPPORTS	       Joins current	                         Runs non-transactionally
-  NOT_SUPPORTED	   Suspends current; runs non-tx	         Runs non-transactionally
-  MANDATORY	       Joins current	                         Throws Exception
-  NEVER	           Throws Exception	                         Runs non-transactionally
+  Propagation 	   If Active Transaction Exists	              If No Transaction Exists
+  REQUIRED	        Joins current	                            Creates new
+  REQUIRES_NEW	    Suspends current; creates new	            Creates new
+  NESTED	        Creates savepoint (nested)	                Creates new
+  SUPPORTS	        Joins current	                            Runs non-transactionally
+  NOT_SUPPORTED	    Suspends current; runs non-tx	            Runs non-transactionally
+  MANDATORY	        Joins current	                            Throws Exception
+  NEVER	            Throws Exception	                        Runs non-transactionally
 
 
+Isolation levels in Transactional:
+->Transaction isolation defines how data integrity is maintained when multiple transactions occur concurrently
+
+Types:
+->DEFAULT
+->READ_UNCOMMITTED
+->READ_COMMITTED
+->REPEATABLE_READ
+->SERIALIZABLE
+
+1)DEFAULT :
+ -> Uses the default isolation level of the underlying database.
+   Ex: PostgreSQL, Oracle, SQL Server: Typically READ_COMMITTED.
+   Ex: MySQL (InnoDB): Typically REPEATABLE_READ
+
+2)READ_UNCOMMITTED:
+  ->The lowest level. Allows a transaction to read data that has been modified but not yet committed by another
+     transaction (known as a dirty read). It provides the highest performance but lowest consistency
+
+3)READ_COMMITTED :
+  ->Prevents dirty reads by ensuring a transaction can only read data that has already been committed. However,
+     non-repeatable reads and phantom reads can still occur.
+
+4)REPEATABLE_READ :
+  -> Ensures that if you read the same row twice within a transaction, you get the same result even if other
+     transactions have committed changes to it. It prevents dirty and non-repeatable reads but still allows phantom
+     reads (new rows appearing in a range query).
+
+5)SERIALIZABLE :
+  -> The highest and most restrictive level. It executes transactions as if they were sequential, preventing all
+     anomalies (dirty reads, non-repeatable reads, and phantom reads). This can significantly impact performance due
+     to heavy locking
+
+
+Note :
+Dirty Read:
+  -> Reading data from another transaction that hasn't been committed yet; if that transaction rolls back, your
+     data becomes invalid.
+Non-repeatable Read	:
+  -> Reading the same row twice and getting different values because another transaction updated and committed it
+     in between.
+Phantom Read :
+  -> Re-running a range query and getting a different number of rows because another transaction inserted or
+     deleted records.
 
 
 
