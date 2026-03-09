@@ -1,0 +1,34 @@
+Memory Leak:
+        ->Objects which are no longer required and present in Heap, but Garbage Collector
+          unable to remove them
+        ->Example : Objects are referenced but unused
+
+Most common causes of memory leaks:
+        ->Excessive use of static members
+          => In Java, static members (variables and methods) are generally not garbage collected
+             until their corresponding class is unloaded. In most typical Java applications,
+             classes remain loaded for the entire duration of the application's execution,
+             meaning static members effectively persist until the application terminates
+        ->Unclosed Resources
+        ->Improper equals and hashcode implementation
+        ->Excessive session creation/ objects creation
+        ->Poorly written custom data structure
+
+How to Prevent Memory Leaks:
+       ->Avoid use of static members because they live for the entire life of the application
+         , by default so it is better to set the reference to null, explicitly.
+       ->Unclosed Resources: Wrap database connections, file streams, and network sockets
+         in a try-with-resources block to ensure they are closed automatically.
+       ->ThreadLocals: Always call ThreadLocal.remove() in a finally block to prevent data
+         from lingering on threads that are reused in a thread pool.
+       ->Listeners/Callbacks: Explicitly unregister event listeners or observers once the
+         observing object is no longer active.Equals/HashCode: Ensure equals() and hashCode()
+         are properly overridden for custom classes used as keys in hash-based collections
+         to avoid duplicate entries
+       ->Avoid String concatenation use StringBuilder
+
+How to find memory leaks:
+       ->Using tool VisualVm (comes with JDK)
+       ->Eclipse Memory Analyzer (MAT)
+
+
