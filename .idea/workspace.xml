@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d5b5115c-d43a-4a99-b128-f17670fd4d02" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nagaraj/corejava/jvm/memoryrelated/Memory_Model" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nagaraj/corejava/jvm/memoryrelated/Memory_Model" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +106,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772895098418</updated>
-      <workItem from="1772895100258" duration="22548000" />
+      <workItem from="1772895100258" duration="23490000" />
     </task>
     <servers />
   </component>
