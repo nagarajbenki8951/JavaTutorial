@@ -1,0 +1,79 @@
+Multithreading in Java :
+        ->Multithreading in Java is a feature that enables a program to run multiple threads simultaneously,
+          allowing tasks to execute in parallel and utilize the CPU more efficiently. A thread is a lightweight,
+          independent unit of execution inside a program (process).
+        ->A process can have multiple threads.
+        ->Each thread runs independently but shares the same memory.
+
+Different Ways to Create Threads:
+ ->Extending the Thread class
+ ->Implementing the Runnable Interface
+
+ 1)Extending the Thread class
+  ->We create a class that extends Thread and override its run() method to define the task. Then, we make an object
+    of this class and call start(), which automatically calls run() and begins the thread’s execution.
+
+  Ex: class CookingTask extends Thread {
+        private String task;
+
+        CookingTask(String task) {
+            this.task = task;
+        }
+
+        public void run() {
+            System.out.println(task + " is being prepared by " +
+                Thread.currentThread().getName());
+        }
+     }
+
+     public class Restaurant {
+        public static void main(String[] args) {
+            Thread t1 = new CookingTask("Pasta");
+            Thread t2 = new CookingTask("Salad");
+            Thread t3 = new CookingTask("Dessert");
+            Thread t4 = new CookingTask("Rice");
+
+            t1.start();
+            t2.start();
+            t3.start();
+            t4.start();
+        }
+     }
+
+     o/p:Salad is being prepared by Thread-1
+         Rice is being prepared by Thread-3
+         Dessert is being prepared by Thread-2
+         Pasta is being prepared by Thread-0
+
+
+ 2)Implementing the Runnable Interface
+   ->We create a new class which implements java.lang.Runnable interface and define the run() method there.
+     Then we instantiate a Thread object and call start() method on this object.
+
+  Ex:class CookingJob implements Runnable {
+         private String task;
+
+         CookingJob(String task) {
+             this.task = task;
+         }
+
+         public void run() {
+             System.out.println(task + " is being prepared by " +
+                 Thread.currentThread().getName());
+         }
+     }
+
+     public class RestaurantRunnable {
+         public static void main(String[] args) {
+             Thread t1 = new Thread(new CookingJob("Soup"));
+             Thread t2 = new Thread(new CookingJob("Pizza"));
+             Thread t3 = new Thread(new CookingJob("Burger"));
+
+             t1.start();
+             t2.start();
+             t3.start();
+         }
+     }
+  o/p:Burger is being prepared by Thread-2
+      Pizza is being prepared by Thread-1
+      Soup is being prepared by Thread-0
