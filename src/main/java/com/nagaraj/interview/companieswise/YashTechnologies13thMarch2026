@@ -1,0 +1,18 @@
+1)Explain oops concepts where u used in ur application?exact classes and methods needed
+2)What all collection u used in ur current project?
+3)Why u only used arraylist? why not array?
+4)What is HATEOAS? how to implement it in springboot?
+5)How @Transaction works internally?
+6)one user trying to access ur application using username, password and jwt token how u will restrict them?
+7)One user accessing application from long time? how u overcome from this?Ex ticket booking? // Ratelimiter is expecting by interview?
+8)How to implement rate limiter in springboot?
+9)Circuit breaker design pattern?
+10)write a test case for this
+  ->public class Calculator {
+        public int multiplyNumbers(int a, int b) {
+            return a * b;
+        }
+    }
+11)Find second highest salary without using limit or top in sql?
+12)can we use record class for Entity in springboot?
+13)linear n non linear collections?
