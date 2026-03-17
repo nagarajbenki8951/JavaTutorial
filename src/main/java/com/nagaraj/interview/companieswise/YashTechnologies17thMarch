@@ -1,0 +1,13 @@
+1)Explain @SpringbootApplication
+2)What are java 8 features u are aware?
+3)int arr[] = { 100,14, 46, 47, 94, 94, 52, 86, 36, 94, 89 }; find second largest element using stream api?
+4)list1 2,3,4 list2 3,4  find common elements of these lists using stream api?
+5)Explain @Transaction  and its propagation levels?
+6)Why singleton class needed?
+7)When multiple database connections are open then how u will handle?
+8)How u will allow cross-origin?
+9)How microservices interact with each other?
+10)Explain Rest-template?
+11)What is the return type of getForObject method?
+12)How u will call the other services using feign clients?
+13)Why skip needed in stream api?
