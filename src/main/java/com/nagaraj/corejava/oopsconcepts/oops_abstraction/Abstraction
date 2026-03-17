@@ -1,0 +1,29 @@
+Abstractions:
+        ->The process of hiding the implementation details and showing only the essential features or
+          functionality of an object, achieved using abstract classes and interfaces.
+
+
+Ex: UPI payments we are just scanning and paying to the user the money deduction and credited from one
+    bank to another bank background process how it happen we dont get to know
+
+Ex using abstract class:
+          ->It may contain:
+          ->Abstract methods (methods without a body)
+          ->Concrete methods (methods with implementation)
+          ->Constructors
+          ->Instance variables
+          ->Static and final methods
+
+
+          public abstract class UpiPayments{
+            abstract void upiPayment(double money);
+
+            public void paymentStatus(String status){
+            System.out.println("payment status "+ status);
+            }
+
+          }
+
+
+
+
