@@ -1,0 +1,27 @@
+1)Why abstract class will be having an constructor
+2)How to create jar in Maven? which command used to do it?
+3)List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "Alice", "Alice", "Bob", "David");
+  duplicate names and no of character in a map
+4)Write the dependency syntax in a dependency
+5)How do you exclude any particular dependency in an application?
+6)Write an immutable class example?
+7)How do you handle the services which are failing in microservices?
+8)What is docker?
+9)How do you update the data of id =2 of severity to 2 to 3 in the given string
+ String str = "[
+                            {
+                                "id": 1,
+                                "body": "First Item",
+                                "severity": 1,
+                                "status": 0
+                            },
+                            {
+                                "id": 2,
+                                "body": "Second Item",
+                                "severity": 2,
+                                "status": 1
+                            }
+                        ]";  // objectMapper
+
+
+
