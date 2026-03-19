@@ -1,0 +1,23 @@
+Why String are immutable in java:
+
+        Key Reasons for Immutability
+
+        Security: Strings are heavily used for sensitive data like database URLs, usernames, passwords, and file
+                  paths. If strings were mutable, a malicious actor could change a network path or password after
+                  a security check but before the operation is executed (a TOCTOU vulnerability).
+
+        String Pooling (Memory Efficiency): Java uses a String Constant Pool to save memory by reusing existing string
+                  literals. If strings were mutable, changing one variable would unexpectedly change every other variable
+                   pointing to that same string in the pool.
+
+        Thread Safety: Because they cannot change, strings are inherently thread-safe. Multiple threads can share a single
+                       string instance without the need for complex synchronization or locking, as there is no risk of one
+                       thread corrupting the data while another is reading it.
+
+        Hashcode Caching: Strings are frequently used as keys in HashMap and HashSet. Since the content never changes, the
+                          hashCode() can be calculated once and cached, significantly improving the performance of these
+                          collections.
+
+        ClassLoader Integrity: The JVM's ClassLoader uses strings to load classes. If a string could be modified, an application
+                               might accidentally (or maliciously) load a different class than intended, leading to severe
+                               instability or security risks.
