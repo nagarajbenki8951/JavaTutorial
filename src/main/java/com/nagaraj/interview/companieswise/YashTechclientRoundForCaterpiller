@@ -1,0 +1,19 @@
+1)Java 17 features?
+2)How do you implement functional interface before and after java 8? write a code?
+3)What are maven and gradle tools?
+4)What is scalability? // resume
+5)What is performance boosting? // resume
+6)How you migrated from spring boot 2.2 to 3.5?
+7)How do you implement two different database connect and call them?
+8)What is lazy and eager in entity?
+9)How do you run springboot in other servers?
+10)How the dependencies will be downloaded? while running on servers?
+11)What is the output's for these: String sample = abc;
+								sample.toUpperCase();
+								System.out.println(sample);
+								sample = sample.toUpperCase();
+								System.out.println(sample);
+12)When service is capable of handling 10 users but suddenly 100 users tried to access how you handle this situation?
+13)How you convert entity to dto?
+14)@Service annotation EmployeeService if we create a EmployeeService object using new what will happen?
+15)How you run the springboot application using commands?

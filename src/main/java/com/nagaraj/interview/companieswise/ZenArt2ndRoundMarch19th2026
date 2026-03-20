@@ -12,7 +12,7 @@
 11)Difference between wait and sleep?
 12)What happens when we override equals method not hashcode in the hashmap?
 13)What is future?
-14)How to create a Thread pool using executer service ?
+14)How to create a Thread pool using execute service ?
 15)Why string are immutable?
 
 
