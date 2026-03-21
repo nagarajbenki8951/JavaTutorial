@@ -1,0 +1,30 @@
+1st Round:
+ coding : String s = 2[aa]3[aa2[b]]aa o/p : aaaaaabbaabbaabbaa
+for others: Rearrange a given linked list in-place
+            Input:  1 -> 2 -> 3 -> 4
+            Output: 1 -> 4 -> 2 -> 3
+            Explanation: Here n = 4, so the correct order is L0->L3->L1->L2
+
+            Input:  1 -> 2 -> 3 -> 4 -> 5
+            Output: 1 -> 5 -> 2 -> 4 -> 3
+            Explanation: Here n = 4, so the correct order is L0->L4->L1->L3->L2  // solve using linkedlist
+
+2nd Round:
+         1)What is Qualifier
+         2)Concurrenthashmap and synchronized hashmap
+           what happens when other is tried to read and same data modified ny other thread
+         3)System design
+            ->employees can login to different locataions, ex us, aus, ind
+            ->CEO wants to know employees location details
+         4)Longest substring without repeating the character code:String  s = "wwpwdduh" o/p = "pwd"
+         5)codeing : int k =6; arr [] = {1,2,3,4,5,6,7,8,9}
+                rotate it k times withoput using new array
+3rd Round:
+        1)Callable vs runnable?
+          ->what callable returns?
+        2)What is the challenges  u faced in current projects and how do u fixed it?
+        3)How u fix OutofMemoryerror?
+        4)What is LRU Cache? Least Recently Used
+        5)When other service wants to get 10000 employees data? what are challenges and how u will resolve it?
+        6)How to implement Pagination and how u call it using url?
+        7)Code: int a  = 50221  find min from given integer o/p = 01225 Time complexity will be O(n) and space complexity will be O(1)?

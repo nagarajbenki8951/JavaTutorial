@@ -1,0 +1,38 @@
+1. Define Database Properties
+    First, configure the connection properties for all potential databases in your application.properties or
+    application.yml file.
+    properties
+    # Primary Database
+    primary.datasource.jdbcUrl=[URL_PRIMARY]
+    primary.datasource.username=[USERNAME_PRIMARY]
+    primary.datasource.password=[PASSWORD_PRIMARY]
+    # ... other primary properties
+
+    # Secondary Database
+    secondary.datasource.jdbcUrl=[URL_SECONDARY]
+    secondary.datasource.username=[USERNAME_SECONDARY]
+    secondary.datasource.password=[PASSWORD_SECONDARY]
+    # ... other secondary properties
+
+
+2. Implement the Abstract Routing DataSource
+    Create a custom class that extends Spring's AbstractRoutingDataSource. This class will contain the logic to determine
+    which actual DataSource should be used for the current operation.
+    Override the determineCurrentLookupKey() method. This method should return a key that identifies the target database
+    (e.g., "primary", "secondary").
+    You'll need a mechanism, often a ThreadLocal variable, to store the current database context or tenant ID
+
+3. Configure Data Sources and the Router
+    Create configuration classes to define beans for each physical DataSource and the routing DataSource.
+    Define individual Data Sources: Use @Configuration classes or methods to create specific DataSource beans
+    using the properties defined earlier.
+    Configure the Routing Data Source: Define a bean for your custom AbstractRoutingDataSource implementation.
+    Map Data Sources: In this bean definition, use a Map to associate the lookup keys ("primary", "secondary")
+    with the actual DataSource beans. Set the targetDataSources property and optionally the defaultTargetDataSource.
+    Configure JPA/Hibernate: Ensure you also configure separate EntityManagerFactory and PlatformTransactionManager
+    beans for each database context, linking them to their respective data sources
+
+
+
+
+
