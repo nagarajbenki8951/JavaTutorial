@@ -1,0 +1,9 @@
+1)Introduce yourself?
+2)Explain about your current project?
+3)How microservices are communicating in your service?
+4)Given a string find the number of occurrences in it?
+5)Given a string find only which is having single characters?
+6)How token is generating in your application for jwt?
+7)Why u are using quarkus over springboot?
+8)How u r generating token id ?// using userid
+9)How u r getting user id? // session
