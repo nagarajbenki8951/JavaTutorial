@@ -1,0 +1,33 @@
+1)Explain the architecture of your application?
+2)What are multithreading?
+3)What is vertical scaling and horizontal scaling?
+4)Why IOC came into picture?
+5)What are stereotype annotation?
+6)Can we use @repository instead of @Service will it work?
+7)List<String> sentences = Arrays.asList(
+                  "Java is great",
+                  "Spring Boot is great",
+                  "Java streams are powerful",
+                  "Java is powerful",
+                  "Spring Boot makes Java easy"
+          ); find occurrences of each word? // did it using flatmap
+8)List<Transaction> transactions = Arrays.asList(
+                  new Transaction("Amit", "IT", 5000, "CREDIT"),
+                  new Transaction("Amit", "IT", 2000, "DEBIT"),
+                  new Transaction("Ravi", "HR", 4000, "CREDIT"),
+                  new Transaction("Ravi", "HR", 1000, "DEBIT"),
+                  new Transaction("Neha", "IT", 7000, "CREDIT"),
+                  new Transaction("Neha", "IT", 3000, "DEBIT"),
+                  new Transaction("Raj", "Finance", 9000, "CREDIT")
+          ); // find the total amount using credit n debit conditions?
+          o/p : Amit 3000
+                Ravi 3000
+                Neha 4000
+                Raj  9000
+9)Suppose 1000 data need to insert on around 12pm how u will do it? // using spring batch and scheduler
+10)Bean vs Object?
+11)What is stream? high level?
+12)What is parallel stream?  write one code
+13)Have u worked on multithreading?
+14)What are the ways to achieve multithreading? apart from thread and runnable?
+15)
